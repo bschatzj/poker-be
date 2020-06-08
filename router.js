@@ -1,7 +1,8 @@
 const express = require("express");
 const router = express.Router(),
 userRoutes = require('./users/userRoutes'),
-authRoutes = require('./auth/register.js')
+authRoutes = require('./auth/register')
+handRoutes = require('./Hands/handRouter')
 
 router.get("/", (req, res) => {
   console.log('ho')
@@ -10,5 +11,6 @@ router.get("/", (req, res) => {
 
 router.use('/users', userRoutes)
 router.use('/auth', authRoutes)
+router.use('/hands', handRoutes)
 
 module.exports = router;

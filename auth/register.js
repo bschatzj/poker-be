@@ -9,7 +9,7 @@ router.post("/register", (req, res) => {
   const user = req.body;
   console.log(req.body)
 
-  if (!user.username || !user.password) {
+  if (!user.username || !user.password || !user.email) {
     res.status(400).json({
       error: "Missing a required field"
     });

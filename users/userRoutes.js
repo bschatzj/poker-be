@@ -18,9 +18,6 @@ router.put("/update/:id", (req, res) => {
     })
 })
 
-router.get('/', (req, res) => {
-    console.log('hi')
-})
 
 router.get("/user/:id", (req, res) => {
     id = req.params.id
@@ -35,17 +32,6 @@ router.get("/user/:id", (req, res) => {
         res.status(400).json(`could not get user ${id}'s profile`)
     })
 })
-
-router.get("/all", (req, res) => {
-    helpers.getAllUsers()
-    .then(users => {
-        res.status(200).json(users) 
-    })
-    .catch(err => {
-        res.status(418).json('sorry I hate backend')
-    })
-})
-
 
 
 module.exports = router;
