@@ -62,7 +62,7 @@ router.post("/login", (req, res) => {
           const token = tokens.generateToken(user);
           res
             .status(200)
-            .json({ message: `${user.username} is logged in.`, id: user.id, token });
+            .json({ message: `${user.username} is logged in.`, username: user.username, id: user.id, token });
         } else {
           res.status(401).json({
             error: "Please provide the correct username and password."
