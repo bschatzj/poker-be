@@ -19,8 +19,9 @@ app.use(router)
 let deck = Shuffler()
 let users = []
 let ids = []
-let waiting = ""
+let waiting = "" 
 let number = 0
+let bet = 0  
 
 io.on('connect', (socket) => {
   socket.on('join', ({ name, room }, callback) => {
@@ -28,10 +29,10 @@ io.on('connect', (socket) => {
       console.log(socket.id)
       io.to(socket.id).emit('err', "you're already in a game")
     }
-    else { 
+    else {   
       if (room === "random") {
         if(number === 0) {
-          number = 1
+          number = 1 
           waiting = name
           room = name
           const inRoom = users.filter((user) => user.room == room.name)
@@ -46,8 +47,9 @@ io.on('connect', (socket) => {
           users.push({ "id": socket.id, name, "room": waiting })
           ids.push(socket.id)
           const inRoom = users.filter((user) => user.room == room.name)
-          console.log("inRoom", inRoom)
+          console.log("inRoom", room)
           io.to(socket.id).emit('registered', { id: socket.id, player: 2, name: name, room: waiting })
+          io.sockets.in(waiting).emit('ready')
         }
       }
     }
@@ -64,9 +66,18 @@ io.on('connect', (socket) => {
     io.sockets.in(room.name).emit('hands', { response: { payer1: { "cardOne": deck.pop(), "cardTwo": deck.pop() } }, response2: { hand2: { "cardOne": deck.pop(), "cardTwo": deck.pop() } } })
   })
  
-    
+  socket.on("bet", ({player, ammount, table}) => {
+    console.log('betstuff', player, ammount, table )
+    io.sockets.in(table).emit('bet', {player, ammount})
+  })
   
+  socket.on("check", (player, table) => {
+    io.sockets.in(table).emit('check', {player, action:"check"})
+  })
 
+  socket.on("fold", (player, table) => {
+    io.sockets.in(table).emit('fold', {player, action:"fold"})
+  })
 
 
 
