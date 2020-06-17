@@ -12,7 +12,7 @@ router.post("/register", (req, res) => {
   if (!user.username || !user.password || !user.email) {
     res.status(400).json({
       error: "Missing a required field"    
-    });
+    });    
   } else {
     const hashed = bcrypt.hashSync(user.password, 10);
     user.password = hashed;
