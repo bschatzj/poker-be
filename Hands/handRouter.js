@@ -7,7 +7,7 @@ const db = require("../dbconfig");
 
 router.get("/:id", (req, res) => {
     id = req.params.id
-    console.log(id)
+    //console.log(id)
     helpers.getUserHand(id)
     .then(hands => {
         res.status(200).json(hands)
@@ -15,10 +15,10 @@ router.get("/:id", (req, res) => {
 })
 
 router.post('/session', (req, res) => {
-    console.log(req)
+    console.log(req.body)
     const hand = req.body
     const id = req.body.id
-    db("hands")
+    db("hands") 
       .insert(hand)
       .then(ids => {
         db("hands")
@@ -29,7 +29,7 @@ router.post('/session', (req, res) => {
               .json(user);
           })
           .catch(error => {
-              console.log(error)
+              //console.log(error)
             res.status(500).json({
               error: "Couldn't add to database"
             });

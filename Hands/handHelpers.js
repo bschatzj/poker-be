@@ -11,6 +11,6 @@ function getUserHand(id){
 }
 
 function addHand(handInfo){
-    console.log("hand info", handInfo)
+   // console.log("hand info", handInfo)
     return db("hands").insert(handInfo)
 }

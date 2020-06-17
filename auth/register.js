@@ -7,16 +7,16 @@ const db = require("../dbconfig");
 
 router.post("/register", (req, res) => {
   const user = req.body;
-  console.log(req.body)
+  //console.log(req.body)
 
   if (!user.username || !user.password || !user.email) {
     res.status(400).json({
-      error: "Missing a required field"
+      error: "Missing a required field"    
     });
   } else {
     const hashed = bcrypt.hashSync(user.password, 10);
     user.password = hashed;
-    console.log(user)
+    //console.log(user)
     db("users")
       .insert(user)
       .then(ids => {
@@ -31,14 +31,14 @@ router.post("/register", (req, res) => {
               .json({ id: user.id, username: user.username, token });
           })
           .catch(error => {
-              console.log(error)
+              //console.log(error)
             res.status(500).json({
               error: "Couldn't add to database"
             });
           });
       })
       .catch(error => {
-        console.log(error.message)
+        //        console.log(error.message)
         res.status(400).json({
           error: "Must have a unique username!",
           response: error.response

@@ -5,7 +5,7 @@ authRoutes = require('./auth/register')
 handRoutes = require('./Hands/handRouter')
 
 router.get("/", (req, res) => {
-  console.log('ho')
+  //console.log('ho')
   res.send({ response: "Server is up and running." }).status(200);
 });
 

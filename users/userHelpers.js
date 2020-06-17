@@ -15,7 +15,7 @@ function update(id, update) {
 function getUser(id) {
     return db('users')
     .where( { id } )
-    .first()
+    .first()  
 }
 
 function getAllUsers() {

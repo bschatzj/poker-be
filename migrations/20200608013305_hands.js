@@ -8,7 +8,7 @@ knex.schema.createTable('hands', table =>{
     table.text('opponent_hand')
     table.text('flop')
     table.text('turn')
-    table.text('river')
+    table.text('river') 
   })
 
-exports.down = knex => knex.schema.dropTableIfExists('hands')
+exports.down = knex => knex.schema.dropTableIfExists('hands')    

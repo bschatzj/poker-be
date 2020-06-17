@@ -5,7 +5,7 @@ const helpers = require("./userHelpers");
 
 router.put("/update/:id", (req, res) => {
     id = req.params.id
-    console.log(id)
+    //console.log(id)
     update = req.body
     helpers.update(id, update)
 
@@ -21,7 +21,7 @@ router.put("/update/:id", (req, res) => {
 
 router.get("/user/:id", (req, res) => {
     id = req.params.id
-    console.log(id)
+    //console.log(id)
     helpers.getUser(id)
 
     .then(profile => {
